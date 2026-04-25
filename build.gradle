@@ -1,0 +1,67 @@
+// ─────────────────────────────────────────────────────────────
+//  app/build.gradle  –  KM Tracker Pro
+// ─────────────────────────────────────────────────────────────
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    // Required for Room annotation processing
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.example.kmtrackerpro'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.kmtrackerpro"
+        minSdk 24          // Android 7.0  – covers ~95 % of devices
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // Enable ViewBinding so we avoid all those findViewById calls
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    // ── Android core ──
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // ── Lifecycle (ViewModel + LiveData) ──
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-service:2.7.0'
+
+    // ── Google Play Services ──
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    implementation 'com.google.android.gms:play-services-location:21.1.0'
+
+    // ── Room database ──
+    implementation 'androidx.room:room-runtime:2.6.1'
+    implementation 'androidx.room:room-ktx:2.6.1'
+    kapt 'androidx.room:room-compiler:2.6.1'
+
+    // ── Coroutines ──
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+}
